@@ -3,8 +3,8 @@ import { DELETE_ELECTION_PROGRESS, GET_ELECTION_PROGRESS, POST_ELECTION_PROGRESS
 import { GetElectionManage, PostElectionManage ,DeleteElectionManage ,UpdateElectionManage} from "../ElectioManage/ElectionManage";
 import { GetPartyManage, PostPartyManage , DeletePartyManage, UpdatePartyManage} from "../PartyManage/PartyManage";
 import { GET_PARTY_PROGRESS, POST_PARTY_PROGRESS } from "../../Admin/party/action/action";
-import { GetPartyConnectManage, PostPartyConnectManage } from "../PartyConnecManage/PartyConnect";
-import { GET_PARTYCONNECT_PROGRESS, POST_PARTYCONNECT_PROGRESS } from "../../Admin/PartyConnect/action/action";
+import { DeletePartyConnectManage, GetPartyConnectManage, PostPartyConnectManage } from "../PartyConnecManage/PartyConnect";
+import { DELETE_PARTYCONNECT_PROGRESS, GET_PARTYCONNECT_PROGRESS, POST_PARTYCONNECT_PROGRESS } from "../../Admin/PartyConnect/action/action";
 import { GET_TOTALCOUNT_PROGRESS } from "../../Admin/TotalCount/action/action";
 import { GetTotalCountManage } from "../TotalCountManage/TotalManage";
 
@@ -52,6 +52,10 @@ export function* GetPartyConnectRootSaga(){
 //POST PARTYCONNECT IN ROOTSAGA
 export function* PostPartyConnectRootSaga(){
   yield takeLatest(POST_PARTYCONNECT_PROGRESS, PostPartyConnectManage )
+}
+// DELETE PARTYCONNECT IN ROOTSAGA
+export function* DeletePartyConnectRootSada(){
+  yield takeLatest ( DELETE_PARTYCONNECT_PROGRESS , DeletePartyConnectManage)
 }
 
 // total count
