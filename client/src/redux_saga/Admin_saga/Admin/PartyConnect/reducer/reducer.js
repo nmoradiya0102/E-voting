@@ -1,66 +1,84 @@
-import { GET_PARTYCONNECT_ERROR, GET_PARTYCONNECT_PROGRESS, GET_PARTYCONNECT_SUCCESS, POST_PARTYCONNECT_ERROR, POST_PARTYCONNECT_PROGRESS, POST_PARTYCONNECT_SUCCESS } from "../action/action";
+import { DELETE_PARTYCONNECT_ERROR, DELETE_PARTYCONNECT_PROGRESS, DELETE_PARTYCONNECT_SUCCESS, GET_PARTYCONNECT_ERROR, GET_PARTYCONNECT_PROGRESS, GET_PARTYCONNECT_SUCCESS, POST_PARTYCONNECT_ERROR, POST_PARTYCONNECT_PROGRESS, POST_PARTYCONNECT_SUCCESS } from "../action/action";
 
 const initialState = {
-  // PARTYCONNECT MAIN STATE  
-  PartyConnectData: [],
-
-  // PARTYCONNECT GET DATA ACTION --- GET 
-  GetPartyConnectProgress: false,
-  GetPartyConnectError: null,
-
-  // PARTYCONNECT POST DATA ACTION --- POST
-  PostPartyConnectProgress: false,
-  PostPartyConnectError: null,
-
-  DataIsLoaded: false
+  data: [],
+  isLoding: false,
+  isError: null,
 };
 
-function PartyConnectReducer(state = initialState, action) { 
+function PartyConnectReducer(state = initialState, action) {
   switch (action.type) {
 
-    // PARTYCONNECT GET DATA ACTION --- GET
+    // GET PARTY CONNECTION
 
     case GET_PARTYCONNECT_PROGRESS:
       return {
         ...state,
-        GetPartyConnectProgress: true,
+        isLoding: true,
+        isError: null,
       };
     case GET_PARTYCONNECT_ERROR:
       return {
         ...state,
-        GetPartyConnectError: action.data,
+        isLoding: false,
+        isError: action.data,
       };
     case GET_PARTYCONNECT_SUCCESS:
       return {
         ...state,
-        DataIsLoaded: true,
-        PartyConnectData: action.data,
-        GetPartyConnectProgress: false,
+        isLoding: false,
+        data: action.data,
+        isError: null,
       };
 
-    // PARTYCONNECT POST DATA ACTION --- POST
+    // POST PARTY CONNECTION
 
-    // case POST_PARTYCONNECT_PROGRESS:
-    //   return {
-    //     ...state,
-    //     PostPartyConnectProgress: true,
-    //   };
-    // case POST_PARTYCONNECT_ERROR:
-    //   return {
-    //     ...state,
-    //     PostPartyConnectError: action.data,
-    //   }; 
-    // case POST_PARTYCONNECT_SUCCESS:
-    //   return {
-    //     ...state,
-    //     DataIsLoaded: true,
-    //     PartyConnectData: state.PartyConnectData.concat(action.payload),
-    //     PostPartyConnectProgress: false,
-    //   };
+    case POST_PARTYCONNECT_PROGRESS:
+      return {
+        ...state,
+        isLoding: true,
+        isError: null,
+      };
+    case POST_PARTYCONNECT_ERROR:
+      return {
+        ...state,
+        isLoding: false,
+        isError: action.data,
+      };
+    case POST_PARTYCONNECT_SUCCESS:
+      return {
+        ...state,
+        isLoding: false,
+        data: state.data.concat(action.data.Data),
+        isError: null,
+      };
 
-    // SET DEFAULT
-    default:
-      return state;
+      //DELETE PARTY CONNECT
+      case DELETE_PARTYCONNECT_PROGRESS:
+      return {
+        ...state,
+        isLoding: true,
+        isError: null,
+      };
+    case DELETE_PARTYCONNECT_SUCCESS:
+      const filterConnect = state.data.filter((val) => val._id !== action.data);
+      return {
+        ...state,
+        isLoding: false,
+        data: filterConnect,
+        isError: null,
+      };
+    case DELETE_PARTYCONNECT_ERROR:
+      return {
+        ...state,
+        isLoding: false,
+        isError: action.data,
+          };
+
+      default:
+        return {
+          ...state,
+        }
   }
 }
 

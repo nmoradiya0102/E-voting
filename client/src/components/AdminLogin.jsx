@@ -5,7 +5,7 @@ import './user/User-tool/userResponsive.css'
 import React, { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import { ADMIN_LOGIN, BASE_URL , LOGIN_URL} from '../redux_saga/constant';
+import { ADMIN_LOGIN, BASE_URL} from '../redux_saga/constant';
 import Cookies from 'js-cookie';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
@@ -21,7 +21,7 @@ const AdminLogin = () => {
       password: password.current.value
     }
     console.log(data);
-    axios.post(BASE_URL + LOGIN_URL, data).then((res) => {
+    axios.post(BASE_URL + ADMIN_LOGIN, data).then((res) => {
       console.log(res);
       Cookies.set("role", res.data.data.role)
       Cookies.set("name", res.data.data.name)

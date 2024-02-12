@@ -3,7 +3,7 @@ import axios from 'axios';
 import Navbar from './Navbar';
 import SideNavbar from './SideNavbar';
 import { useDispatch, useSelector } from 'react-redux';
-import { BASE_URL, GET_USER_LIST } from '../../redux_saga/constant';
+import { BASE_URL, GET_USER_API } from '../../redux_saga/constant';
 import { GET_PARTY_PROGRESS } from '../../redux_saga/Admin_saga/Admin/party/action/action';
 import { GET_TOTALCOUNT_PROGRESS } from '../../redux_saga/Admin_saga/Admin/TotalCount/action/action';
 
@@ -21,7 +21,7 @@ function ElectionVote() {
     dispatch({ type: GET_TOTALCOUNT_PROGRESS })
     const GetUser = async () => {
       try {
-        const userResponse = await axios.get(BASE_URL + GET_USER_LIST);
+        const userResponse = await axios.get(BASE_URL + GET_USER_API);
         const userlength = userResponse.data.data;
 
         setUlength((prev) => ({

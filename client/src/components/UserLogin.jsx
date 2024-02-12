@@ -4,7 +4,7 @@ import formlogo from './user/User-tool/image/form logo.png';
 import "./user/User-tool/User.css";
 import './user/User-tool/userResponsive.css';
 import axios from 'axios';
-import { BASE_URL, USER_LOGIN , LOGIN_URL} from '../redux_saga/constant';
+import { BASE_URL, USER_LOGIN} from '../redux_saga/constant';
 import Cookies from 'js-cookie';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -23,7 +23,7 @@ const UserLogin = () => {
             password: password.current.value
         };
 
-        axios.post(BASE_URL + LOGIN_URL, data)
+        axios.post(BASE_URL + USER_LOGIN, data)
             .then((res) => {
                 Cookies.set("role", res.data.data.role);
                 Cookies.set("_id", res.data.data._id);

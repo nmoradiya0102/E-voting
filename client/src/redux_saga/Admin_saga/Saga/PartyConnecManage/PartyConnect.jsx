@@ -1,5 +1,5 @@
 import { call, put } from "redux-saga/effects"
-import { GetPartyCnnectAxios, PostPartyConnectAxios } from "../../Admin/PartyConnect/api/api";
+import { GetPartyConnectAxios, PostPartyConnectAxios } from "../../Admin/PartyConnect/api/api";
 import {
   GET_PARTYCONNECT_ERROR,
   GET_PARTYCONNECT_SUCCESS,
@@ -7,10 +7,10 @@ import {
   POST_PARTYCONNECT_SUCCESS
 } from "../../Admin/PartyConnect/action/action";
 
-// GET P MANAGE 
+// GET PAERT MANAGE
 export function* GetPartyConnectManage(action) {
   try {
-    const res = yield call(GetPartyCnnectAxios, action)
+    const res = yield call(GetPartyConnectAxios, action)
     const data = res.data;
     const status = res.status;
     if (status === 200) {
@@ -23,7 +23,7 @@ export function* GetPartyConnectManage(action) {
   }
 }
 
-// POST ELECTION MANAGE  
+// POST ELECTION MANAGE
 export function* PostPartyConnectManage(action) {
   try {
     const res = yield call(PostPartyConnectAxios, action);

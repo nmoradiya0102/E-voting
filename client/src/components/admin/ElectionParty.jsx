@@ -27,7 +27,6 @@ function ElectionParty() {
   const partyAdd = (e) => {
     const formData = new FormData();
 
-    // VALIDATION PARTY NAME
     if (party_name.trim() === "") {
       setValidation((rest) => ({
         ...rest,
@@ -37,7 +36,6 @@ function ElectionParty() {
       formData.append("party_name", party_name);
     }
 
-    // VALIDATION PARTY LOGO
     if (!party_logo) {
       setValidation((rest) => ({
         ...rest,
@@ -47,7 +45,6 @@ function ElectionParty() {
       formData.append("party_logo", party_logo);
     }
 
-    // VALIDATION SHORT CODE
     if (short_code.trim() === "" || short_code.length < 3) {
       setValidation((rest) => ({
         ...rest,
@@ -57,22 +54,18 @@ function ElectionParty() {
       formData.append("short_code", short_code.trim());
     }
 
-    // If all validations pass, dispatch the form data 
     if (party_name && party_logo && short_code.trim()) {
       dispatch({ type: POST_PARTY_PROGRESS, payload: formData });
-
-      // Show success alert
       Swal.fire({
         icon: 'success',
         title: 'Election-Party Added Successfully!',
         html: `<p>Election-Party Name: ${party_name}</p><p>Party Short Code: ${short_code}</p>`,
         showConfirmButton: false,
-        timer: 1500, 
+        timer: 1500,
       }).then(() => {
         window.location.reload();
       });
     } else {
-      // Show error alert
       Swal.fire({
         icon: 'error',
         title: 'Oops...',

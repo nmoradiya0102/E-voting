@@ -1,4 +1,16 @@
-import { GET_ELECTION_ERROR, GET_ELECTION_PROGRESS, GET_ELECTION_SUCCESS, POST_ELECTION_ERROR, POST_ELECTION_PROGRESS, POST_ELECTION_SUCCESS } from "../action/action";
+import {  GET_ELECTION_ERROR,
+          GET_ELECTION_PROGRESS,
+          GET_ELECTION_SUCCESS,
+          POST_ELECTION_ERROR,
+          POST_ELECTION_PROGRESS,
+          POST_ELECTION_SUCCESS,
+          DELETE_ELECTION_PROGRESS,
+          DELETE_ELECTION_SUCCESS,
+          DELETE_ELECTION_ERROR,
+          UPDATE_ELECTION_PROGRESS,
+          UPDATE_ELECTION_SUCCESS,
+          UPDATE_ELECTION_ERROR
+        } from "../action/action";
 
 const initialState = {
   ElectionData: [],
@@ -12,7 +24,7 @@ const initialState = {
 
 function ElectionReducer(state = initialState, action) {
   switch (action.type) {
-
+     // GET
     case GET_ELECTION_PROGRESS:
       return {
         ...state,
@@ -30,6 +42,7 @@ function ElectionReducer(state = initialState, action) {
         ElectionData: action.data,
       };
 
+      // POST
     case POST_ELECTION_PROGRESS:
       return {
         ...state,
@@ -47,8 +60,60 @@ function ElectionReducer(state = initialState, action) {
         ElectionData: state.ElectionData.concat(action.payload),
         PostUserProgress: false,
       };
-    default:
-      return state;
+
+
+      // DELETE
+      case DELETE_ELECTION_PROGRESS:
+      return {
+        ...state,
+        isLoding: true,
+        isError: null,
+      };
+    case DELETE_ELECTION_SUCCESS:
+      const filterElection = state.data.filter(
+        (val) => val._id !== action.data
+      );
+      return {
+        ...state,
+        isLoding: false,
+        data: filterElection,
+        isError: null,
+      };
+    case DELETE_ELECTION_ERROR:
+      return {
+        ...state,
+        isLoding: false,
+        isError: action.data,
+      };
+
+
+      //UPDATE
+    case UPDATE_ELECTION_PROGRESS:
+      return {
+        ...state,
+        isLoding: true,
+        isError: null,
+      };
+    case UPDATE_ELECTION_SUCCESS:
+      const updateData = state.data.map((item) =>
+        item._id === action.data._id ? action.data : item
+      );
+      return {
+        ...state,
+        isLoding: false,
+        data: updateData,
+        isError: null,
+      };
+    case UPDATE_ELECTION_ERROR:
+      return {
+        ...state,
+        isLoding: false,
+        isError: action.data,
+      };
+
+    default: {
+      return { ...state };
+    }
   }
 }
 

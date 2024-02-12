@@ -4,70 +4,131 @@ import {
   GET_PARTY_SUCCESS,
   POST_PARTY_ERROR,
   POST_PARTY_PROGRESS,
-  POST_PARTY_SUCCESS
+  POST_PARTY_SUCCESS,
+  DELETE_PARTY_PROGRESS,
+  DELETE_PARTY_SUCCESS,
+  DELETE_PARTY_ERROR,
+  UPDATE_PARTY_PROGRESS,
+  UPDATE_PARTY_SUCCESS,
+  UPDATE_PARTY_ERROR
 } from "../action/action";
 
 const initialState = {
-  // PARTY MAIN STATE  
-  PartyData: [],
-
-  // PARTY GET DATA ACTION --- GET 
-  GetPartyProgress: false,
-  GetPartyError: null,
-
-  // PARTY POST DATA ACTION --- POST
-  PostPartyProgress: false,
-  PostPartyError: null,
-
-  DataIsLoaded: false
+  party: [],
+  isLoading: false,
+  isError: null,
 };
 
 function PartyReducer(state = initialState, action) {
+  console.log(action, "from reducer");
   switch (action.type) {
 
-    // PARTY GET DATA ACTION --- GET
-
+    // PARTY GET
     case GET_PARTY_PROGRESS:
-      return {
-        ...state,
-        GetPartyProgress: true,
-      };
+      {
+        return {
+          ...state,
+          isLoading: true,
+          isError : null,
+        };
+      }
     case GET_PARTY_ERROR:
-      return {
+      {
+        return {
         ...state,
-        GetPartyError: action.data,
+        isLoading: false,
+        isError: action.data,
       };
+    }
     case GET_PARTY_SUCCESS:
-      return {
+      {
+        return {
         ...state,
-        DataIsLoaded: true,
-        PartyData: action.data,
-        GetPartyProgress: false,
+        isLoading: true,
+        party: action.data,
+        isError: null,
       };
+    }
 
-    // PARTY POST DATA ACTION --- POST
+    // PARTY POST
 
     case POST_PARTY_PROGRESS:
-      return {
+      {
+        return {
         ...state,
-        PostPartyProgress: true,
+        isLoading: true,
       };
+    }
     case POST_PARTY_ERROR:
-      return {
+      {
+        return {
         ...state,
-        PostPartyError: action.data,
+        isLoading : false,
+        isError: action.data,
       };
+    }
     case POST_PARTY_SUCCESS:
+      {
+        return {
+        ...state,
+        isLoading: true,
+        party: state.PartyData.concat(action.payload),
+        isError: null,
+      };
+    }
+
+      // PARTY DELETE
+      case DELETE_PARTY_PROGRESS:
+        return {
+          ...state,
+          isLoding: true,
+          isError: null,
+        };
+      case DELETE_PARTY_SUCCESS:
+        const filterParty = state.data.filter((val) => val._id !== action.data);
+        return {
+          ...state,
+          isLoding: false,
+          party: filterParty,
+          isError: null,
+        };
+      case DELETE_PARTY_ERROR:
+        return {
+          ...state,
+          isLoding: false,
+          isError: action.data,
+        };
+
+        // PARTY UPDATE
+      case UPDATE_PARTY_PROGRESS:
+        return {
+          ...state,
+          isLoding: true,
+          isError: null,
+        };
+      case UPDATE_PARTY_SUCCESS:
+        const updatedData = state.data.map((item) =>
+          item._id === action.data._id ? action.data : item
+        );
+        return {
+          ...state,
+          isLoading: false,
+          data: updatedData,
+          isError: null,
+        };
+      case UPDATE_PARTY_ERROR:
+        return {
+          ...state,
+          isLoding: false,
+          isError: action.data,
+        };
+
+       
+
+    default:
       return {
         ...state,
-        DataIsLoaded: true,
-        PartyData: state.PartyData.concat(action.payload),
-        PostPartyProgress: false,
-      };
-
-    // SET DEFAULT
-    default:
-      return state;
+      }
   }
 }
 

@@ -1,43 +1,40 @@
 import { GET_TOTALCOUNT_ERROR, GET_TOTALCOUNT_PROGRESS, GET_TOTALCOUNT_SUCCESS } from "../action/action";
 
 const initialState = {
-  // PARTYCONNECT MAIN STATE  
-  PartyConnectData: [],
-
-  // PARTYCONNECT GET DATA ACTION --- GET 
-  GetTotalCountProgress: false,
-  GetTotalCountError: null,
-
-  DataIsLoaded: false
+  total: [],
+  isLoading: false,
+  isError: null,
 };
 
 function TotalCountReducer(state = initialState, action) {
   switch (action.type) {
 
-    // PARTYCONNECT GET DATA ACTION --- GET
+   // TOTAL COUNT
 
     case GET_TOTALCOUNT_PROGRESS:
       return {
         ...state,
-        GetTotalCountProgress: true,
+        isLoading: true,
       };
     case GET_TOTALCOUNT_ERROR:
       return {
         ...state,
-        GetTotalCountError: action.data,
+        isLoading : false,
+        isError: action.data,
       };
     case GET_TOTALCOUNT_SUCCESS:
       return {
         ...state,
-        DataIsLoaded: true,
-        PartyConnectData: action.data,
-        GetTotalCountProgress: false,
+        isLoading : true,
+        total: action.data,
+        isError: null,
       };
 
-
-    // SET DEFAULT
-    default:
-      return state;
+    default: {
+      return {
+        ...state,
+      }
+    }
   }
 }
 
