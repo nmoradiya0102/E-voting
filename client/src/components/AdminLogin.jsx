@@ -5,11 +5,14 @@ import './user/User-tool/userResponsive.css'
 import React, { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import { ADMIN_LOGIN, BASE_URL } from '../redux_saga/constant'
-import Cookies from 'js-cookie'
+import { ADMIN_LOGIN, BASE_URL , LOGIN_URL} from '../redux_saga/constant';
+import Cookies from 'js-cookie';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 const AdminLogin = () => {
 
+  const MySwal = withReactContent(Swal);
   const name = useRef()
   const password = useRef()
   const handleLogin = () => {
@@ -18,13 +21,24 @@ const AdminLogin = () => {
       password: password.current.value
     }
     console.log(data);
-    axios.post(BASE_URL + ADMIN_LOGIN, data).then((res) => {
+    axios.post(BASE_URL + LOGIN_URL, data).then((res) => {
       console.log(res);
       Cookies.set("role", res.data.data.role)
       Cookies.set("name", res.data.data.name)
       window.location = "/"
-    }).catch((err) => {
-      console.log(err);
+    })
+    .catch((err) => {
+      MySwal.fire({
+        title: "Admin Information Is Not Valid..!",
+        icon: "error",
+        showCancelButton: false,
+        confirmButtonText: 'OK',
+    })
+    .then((result) => {
+        if (result.isConfirmed) {
+            window.location = "/";
+        }
+    });
     })
   }
 

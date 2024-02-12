@@ -1,14 +1,9 @@
 import { GET_ELECTION_ERROR, GET_ELECTION_PROGRESS, GET_ELECTION_SUCCESS, POST_ELECTION_ERROR, POST_ELECTION_PROGRESS, POST_ELECTION_SUCCESS } from "../action/action";
 
 const initialState = {
-  // ELECTION MAIN STATE
   ElectionData: [],
-
-  // ELECTION GET DATA ACTION --- GET
   GetUserProgress: false,
   GetUserError: null,
-
-  // ELECTION POST DATA ACTION --- POST
   PostUserProgress: false,
   PostUserError: null,
 
@@ -17,8 +12,6 @@ const initialState = {
 
 function ElectionReducer(state = initialState, action) {
   switch (action.type) {
-
-    // ELECTION GET DATA ACTION --- GET
 
     case GET_ELECTION_PROGRESS:
       return {
@@ -37,8 +30,6 @@ function ElectionReducer(state = initialState, action) {
         ElectionData: action.data,
       };
 
-    // ELECTION POST DATA ACTION --- POST
-
     case POST_ELECTION_PROGRESS:
       return {
         ...state,
@@ -56,7 +47,6 @@ function ElectionReducer(state = initialState, action) {
         ElectionData: state.ElectionData.concat(action.payload),
         PostUserProgress: false,
       };
-    // SET DEFAULT
     default:
       return state;
   }

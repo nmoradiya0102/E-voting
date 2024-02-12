@@ -13,7 +13,6 @@ export function GetElectionAxios() {
   }).catch((error) => console.log(error))
 }
 
-
 // ELECTION POST API IS IN FUNCTION
 export function PostElectionAxios(action) {
   console.log("API CALLING", action.payload);
@@ -29,6 +28,6 @@ export function PostElectionAxios(action) {
     })
     .catch((error) => {
       console.log("Error in API call", error);
-      throw error; // Rethrow the error to be caught by the calling code
+      throw error;
     });
 }
