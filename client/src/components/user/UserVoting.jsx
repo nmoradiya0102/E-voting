@@ -9,7 +9,7 @@ import "./User-tool/User.css";
 import "./User-tool/userResponsive.css";
 import { POST_VOTE_PROGRESS } from '../../redux_saga/User_saga/Voting/action';
 import { GET_PARTYCONNECT_PROGRESS } from '../../redux_saga/Admin_saga/Admin/PartyConnect/action/action';
-import { BASE_URL, GET_VOTE } from '../../redux_saga/constant';
+import { BASE_URL, GET_VOTE_API } from '../../redux_saga/constant';
 
 const UserVoting = () => {
     const [vote, setVote] = useState()
@@ -20,7 +20,7 @@ const UserVoting = () => {
 
     const GetVoteList = async () => {
         const userData = []
-        const res = await axios.get(BASE_URL + GET_VOTE)
+        const res = await axios.get(BASE_URL + GET_VOTE_API)
         const userinfo = res.data.data
         userinfo.map(i =>
             userData.push(i.user.cardNo)
