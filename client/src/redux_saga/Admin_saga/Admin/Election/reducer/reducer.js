@@ -66,7 +66,7 @@ function ElectionReducer(state = initialState, action) {
       case DELETE_ELECTION_PROGRESS:
       return {
         ...state,
-        isLoding: true,
+        isLoading: true,
         isError: null,
       };
     case DELETE_ELECTION_SUCCESS:
@@ -75,14 +75,14 @@ function ElectionReducer(state = initialState, action) {
       );
       return {
         ...state,
-        isLoding: false,
+        isLoading: false,
         data: filterElection,
         isError: null,
       };
     case DELETE_ELECTION_ERROR:
       return {
         ...state,
-        isLoding: false,
+        isLoading: false,
         isError: action.data,
       };
 
@@ -91,7 +91,7 @@ function ElectionReducer(state = initialState, action) {
     case UPDATE_ELECTION_PROGRESS:
       return {
         ...state,
-        isLoding: true,
+        isLoading: true,
         isError: null,
       };
     case UPDATE_ELECTION_SUCCESS:
@@ -100,14 +100,14 @@ function ElectionReducer(state = initialState, action) {
       );
       return {
         ...state,
-        isLoding: false,
+        isLoading: false,
         data: updateData,
         isError: null,
       };
     case UPDATE_ELECTION_ERROR:
       return {
         ...state,
-        isLoding: false,
+        isLoading: false,
         isError: action.data,
       };
 

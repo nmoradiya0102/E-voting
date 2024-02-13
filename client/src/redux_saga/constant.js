@@ -21,7 +21,7 @@
 //  USER
 
 // vote route
-export const POST_VOTE = '/vote/create'
+// export const POST_VOTE = '/vote/create'
 export const GET_VOTE = '/vote/list'
 //login user
 // export const USER_LOGIN = "/login/user"

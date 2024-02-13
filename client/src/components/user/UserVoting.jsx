@@ -7,7 +7,7 @@ import withReactContent from 'sweetalert2-react-content';
 import { useDispatch, useSelector } from 'react-redux';
 import "./User-tool/User.css";
 import "./User-tool/userResponsive.css";
-import { VOTE_POST_PROGRESS } from '../../redux_saga/User_saga/Voting/action';
+import { POST_VOTE_PROGRESS } from '../../redux_saga/User_saga/Voting/action';
 import { GET_PARTYCONNECT_PROGRESS } from '../../redux_saga/Admin_saga/Admin/PartyConnect/action/action';
 import { BASE_URL, GET_VOTE } from '../../redux_saga/constant';
 
@@ -65,7 +65,7 @@ const UserVoting = () => {
                 }
             });
         } else {
-            dispatch({ type: VOTE_POST_PROGRESS, payload: vote })
+            dispatch({ type: POST_VOTE_PROGRESS, payload: vote })
             MySwal.fire({
                 title: 'Your Vote Is Successfully Submitted..!',
                 text: 'You have submitted a vote ?',

@@ -41,7 +41,10 @@
         console.log(action.payload._id);
         const data = action.payload._id;
         const status = res.status;
-        return { data, status };
+        return {
+          data,
+          status
+        };
       })
       .catch((error) => {
         console.log(error);
@@ -60,7 +63,10 @@
       .then((res) => {
         const data = action.payload;
         const status = res.status;
-        return { data, status };
+        return {
+          data,
+          status
+        };
       })
       .catch((err) => {
         console.log(err);

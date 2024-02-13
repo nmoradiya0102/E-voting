@@ -2,7 +2,7 @@ import { DELETE_PARTYCONNECT_ERROR, DELETE_PARTYCONNECT_PROGRESS, DELETE_PARTYCO
 
 const initialState = {
   data: [],
-  isLoding: false,
+  isLoading: false,
   isError: null,
 };
 
@@ -14,19 +14,19 @@ function PartyConnectReducer(state = initialState, action) {
     case GET_PARTYCONNECT_PROGRESS:
       return {
         ...state,
-        isLoding: true,
+        isLoading: true,
         isError: null,
       };
     case GET_PARTYCONNECT_ERROR:
       return {
         ...state,
-        isLoding: false,
+        isLoading: false,
         isError: action.data,
       };
     case GET_PARTYCONNECT_SUCCESS:
       return {
         ...state,
-        isLoding: false,
+        isLoading: false,
         data: action.data,
         isError: null,
       };
@@ -36,19 +36,19 @@ function PartyConnectReducer(state = initialState, action) {
     case POST_PARTYCONNECT_PROGRESS:
       return {
         ...state,
-        isLoding: true,
+        isLoading: true,
         isError: null,
       };
     case POST_PARTYCONNECT_ERROR:
       return {
         ...state,
-        isLoding: false,
+        isLoading: false,
         isError: action.data,
       };
     case POST_PARTYCONNECT_SUCCESS:
       return {
         ...state,
-        isLoding: false,
+        isLoading: false,
         data: state.data.concat(action.data.Data),
         isError: null,
       };
@@ -57,21 +57,21 @@ function PartyConnectReducer(state = initialState, action) {
       case DELETE_PARTYCONNECT_PROGRESS:
       return {
         ...state,
-        isLoding: true,
+        isLoading: true,
         isError: null,
       };
     case DELETE_PARTYCONNECT_SUCCESS:
       const filterConnect = state.data.filter((val) => val._id !== action.data);
       return {
         ...state,
-        isLoding: false,
+        isLoading: false,
         data: filterConnect,
         isError: null,
       };
     case DELETE_PARTYCONNECT_ERROR:
       return {
         ...state,
-        isLoding: false,
+        isLoading: false,
         isError: action.data,
           };
 

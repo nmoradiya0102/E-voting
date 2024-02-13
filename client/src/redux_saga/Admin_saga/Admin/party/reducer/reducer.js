@@ -81,21 +81,21 @@ function PartyReducer(state = initialState, action) {
       case DELETE_PARTY_PROGRESS:
         return {
           ...state,
-          isLoding: true,
+          isLoading: true,
           isError: null,
         };
       case DELETE_PARTY_SUCCESS:
         const filterParty = state.data.filter((val) => val._id !== action.data);
         return {
           ...state,
-          isLoding: false,
+          isLoading: false,
           party: filterParty,
           isError: null,
         };
       case DELETE_PARTY_ERROR:
         return {
           ...state,
-          isLoding: false,
+          isLoading: false,
           isError: action.data,
         };
 
@@ -103,7 +103,7 @@ function PartyReducer(state = initialState, action) {
       case UPDATE_PARTY_PROGRESS:
         return {
           ...state,
-          isLoding: true,
+          isLoading: true,
           isError: null,
         };
       case UPDATE_PARTY_SUCCESS:
@@ -119,11 +119,9 @@ function PartyReducer(state = initialState, action) {
       case UPDATE_PARTY_ERROR:
         return {
           ...state,
-          isLoding: false,
+          isLoading: false,
           isError: action.data,
         };
-
-       
 
     default:
       return {
